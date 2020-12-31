@@ -68,6 +68,18 @@ public class PlayerController : MonoBehaviour
         bulletShot.radialShotTime = (int)(bulletShot.radialShotTime * 1.1f);
         bulletShot.SetShotTime();
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "mob" && canHurt)
+        {
+            Debug.Log("Hurt");
+            hp -= 20;
+            StartCoroutine(HurtCoroutine());
+            if (hp <= 0)
+                Destroy(this.gameObject);
+        }
+    }
     private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "mob" && canHurt)
@@ -77,6 +89,49 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(HurtCoroutine());
             if (hp <= 0)
                 Destroy(this.gameObject);
+        }
+    }
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "m_Bullet" && canHurt)
+        {
+            Debug.Log("Hurt");
+            StartCoroutine(HurtCoroutine());
+            if (hp <= 0)
+                SceneManager.LoadScene(0);
+        }
+        else if (collision.gameObject.tag == "i_HP")
+        {
+            hp += (int)(maxHp * 0.2f);
+            if (hp > maxHp)
+                hp = maxHp;
+            Destroy(collision.gameObject);
+
+        }
+        else if (collision.gameObject.tag == "i_LV")
+        {
+            if (level < 5)
+            {
+                LevelUp();
+            }
+            Destroy(collision.gameObject);
+
+        }
+        else if (collision.gameObject.tag == "EXP")
+        {
+            exp += 1;
+            score += 50;
+            if (exp >= needExp[level] && level < 5)
+                LevelUp();
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "i_Guard")
+        {
+            StopCoroutine(bulletShot.Guard2Coroutine());
+            StopCoroutine(bulletShot.BoomCoroutine());
+            bulletShot.canBoom = 1;
+            bulletShot.canGuard = 1;
+            Destroy(collision.gameObject);
         }
     }
     private void OnCollisionEnter(Collision collision)

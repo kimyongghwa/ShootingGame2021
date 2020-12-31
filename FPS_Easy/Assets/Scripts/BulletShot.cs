@@ -91,7 +91,9 @@ public class BulletShot : MonoBehaviour
                 if (unUsedBullets.Count == 0)
                 {
                     BulletMove _bullet = Instantiate(bullet, this.gameObject.transform).GetComponent<BulletMove>();
+                    
                     _bullet.gameObject.transform.parent = null;
+                    _bullet.transform.position = new Vector3(_bullet.transform.position.x + 0.66f, _bullet.transform.position.y + 0.5f);
                     _bullet.SetDirection(new Vector3(Mathf.Cos(gak), Mathf.Sin(gak)));
                     _bullet.controller = gameObject.GetComponent<BulletShot>();
                 }
@@ -101,6 +103,7 @@ public class BulletShot : MonoBehaviour
                     unUsedBullets[0].transform.position = this.transform.position;
                     unUsedBullets[0].SetActive(true);
                     unUsedBullets.RemoveAt(0);
+                    _bullet.transform.position = new Vector3(_bullet.transform.position.x + 0.66f, _bullet.transform.position.y + 0.5f);
                     _bullet.SetDirection(new Vector3(Mathf.Cos(gak), Mathf.Sin(gak)));
                     _bullet.controller = gameObject.GetComponent<BulletShot>();
                 }
