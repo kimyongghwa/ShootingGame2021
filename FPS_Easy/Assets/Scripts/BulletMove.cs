@@ -33,7 +33,9 @@ public class BulletMove : MonoBehaviour
         if (collision.gameObject.tag == "mob")
         {
             CameraShake.instance.Shake(0.3f, 0.1f);
-            collision.gameObject.GetComponent<MobController>().hp -= controller.atk;
+            MobController mobb = collision.gameObject.GetComponent<MobController>();
+            mobb.hp -= controller.atk;
+            mobb.BeHurt();
             this.gameObject.SetActive(false);
             controller.unUsedBullets.Add(this.gameObject);
         }

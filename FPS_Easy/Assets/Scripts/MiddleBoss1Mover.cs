@@ -5,6 +5,7 @@ using UnityEngine;
 public class MiddleBoss1Mover : MobMover
 {
     public bool moverOn;
+    public GameObject targetMaster;
     public float rotateTime;
     public float rotateValue;
     // Start is called before the first frame update
@@ -26,7 +27,7 @@ public class MiddleBoss1Mover : MobMover
             Debug.Log(transform.rotation.eulerAngles.z);
             if (moverOn || (int)transform.rotation.eulerAngles.z % 180 != 0)
             {
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, transform.rotation.eulerAngles.z + 15));
+                targetMaster.transform.rotation = Quaternion.Euler(new Vector3(0, 0, targetMaster.transform.rotation.eulerAngles.z + 15));
             }
         }
     }

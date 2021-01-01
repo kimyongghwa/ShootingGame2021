@@ -68,7 +68,7 @@ public class MobMaker : MonoBehaviour
                         {
                             MobController _mob = unUsedMob1[0].GetComponent<MobController>();
                             _mob.hp = _mob.maxHp;
-                            unUsedMob1[0].transform.position = new Vector3(7, Random.Range(-5, 6), 0);
+                            unUsedMob1[0].transform.position = new Vector3(7, Random.Range(-4, 5), 0);
                             unUsedMob1[0].SetActive(true);
                             _mob.parents = this;
                             nowMob++;
@@ -78,7 +78,7 @@ public class MobMaker : MonoBehaviour
                         else
                         {
                             MobController _mob = Instantiate(mobData[mobNum]).GetComponent<MobController>(); ;
-                            _mob.transform.position = new Vector3(7, Random.Range(-5, 6), 0);
+                            _mob.transform.position = new Vector3(7, Random.Range(-4, 5), 0);
                             _mob.gameObject.transform.parent = null;
                             _mob.parents = this;
                             nowMob++;
@@ -89,7 +89,7 @@ public class MobMaker : MonoBehaviour
                         {
                             MobController _mob = unUsedMob2[0].GetComponent<MobController>();
                             _mob.hp = _mob.maxHp;
-                            unUsedMob2[0].transform.position = new Vector3(7, Random.Range(-5, 6), 0);
+                            unUsedMob2[0].transform.position = new Vector3(7, Random.Range(-4, 5), 0);
                             unUsedMob2[0].SetActive(true);
                             _mob.parents = this;
                             nowMob++;
@@ -99,7 +99,7 @@ public class MobMaker : MonoBehaviour
                         else
                         {
                             MobController _mob = Instantiate(mobData[mobNum]).GetComponent<MobController>(); ;
-                            _mob.transform.position = new Vector3(7, Random.Range(-5, 6), 0);
+                            _mob.transform.position = new Vector3(7, Random.Range(-4, 5), 0);
                             _mob.gameObject.transform.parent = null;
                             _mob.parents = this;
                             nowMob++;

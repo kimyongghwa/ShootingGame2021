@@ -8,6 +8,16 @@ public class BulletShot : MonoBehaviour
     public int atk;
     public int lineAtk = 20;
     public int radialAtk = 10;
+    public int maxBullets;
+    public int useBullets = 1;
+    int nowBullets;
+    public int GetNBullet
+    {
+        get
+        {
+            return nowBullets;
+        }
+    }
     public bool lineMode;
     public bool isShooting;
     public float shotTime;
@@ -19,16 +29,21 @@ public class BulletShot : MonoBehaviour
     public GameObject guard;
     public GameObject boom;
     public bool canShot = true;
+    public bool canReload = true;
     public float canGuard = 1;
     public float canBoom = 1;
     public float angle;
+
+    Animator anim;
 
     public List<GameObject> unUsedBullets = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         StartCoroutine(ShotCoroutine());
+        nowBullets = maxBullets;
     }
 
 
@@ -40,10 +55,17 @@ public class BulletShot : MonoBehaviour
             lineMode = !lineMode;
             SetShotTime();
         }
-        if (Input.GetKey(KeyCode.Z) && canShot)
+        if (Input.GetKey(KeyCode.Z) && canShot && nowBullets > 0)
         {
             Shot();
+            nowBullets -= useBullets;
             StartCoroutine(ShotCoroutine());
+        }
+        else if (Input.GetKey(KeyCode.Z) && nowBullets <= 0 && canReload)
+        {
+            canReload = false;
+            anim.SetBool("isReload", true);
+            StartCoroutine(ReloadCoroutine());
         }
         if (Input.GetKeyDown(KeyCode.A) && canGuard==1 && pc.level >= 3)
         {
@@ -57,6 +79,12 @@ public class BulletShot : MonoBehaviour
 
             StartCoroutine(BoomCoroutine());
         }
+        if (Input.GetKeyDown(KeyCode.C) && canReload)
+        {
+            canReload = false;
+            anim.SetBool("isReload", true);
+            StartCoroutine(ReloadCoroutine());
+        }
 
     }
 
@@ -66,6 +94,7 @@ public class BulletShot : MonoBehaviour
         {
             shotTime = lineShotTime;
             bulletNum = 1;
+            useBullets = 1;
             angle = 0;
             atk = lineAtk;
         }
@@ -73,7 +102,8 @@ public class BulletShot : MonoBehaviour
         {
             shotTime = radialShotTime;
             bulletNum = 5;
-            angle = 70;
+            useBullets = 5;
+            angle = 30;
             atk = radialAtk;
         }
     }
@@ -150,5 +180,13 @@ public class BulletShot : MonoBehaviour
         }
         canBoom = 1;
 
+    }
+
+    public IEnumerator ReloadCoroutine()
+    {
+        yield return new WaitForSeconds(1.5045f);
+        anim.SetBool("isReload", false);
+        canReload = true;
+        nowBullets = maxBullets;
     }
 }

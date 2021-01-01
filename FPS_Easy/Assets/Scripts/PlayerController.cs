@@ -17,7 +17,9 @@ public class PlayerController : MonoBehaviour
             return _instance;
         }
     }
-
+    public Renderer renderer;
+    public Material normalMarterial;
+    public Material hitMarterial;
     public float moveSpeed;
     public int level = 1;
     public int exp = 0;
@@ -180,9 +182,11 @@ public class PlayerController : MonoBehaviour
     
     IEnumerator HurtCoroutine()
     {
+        renderer.material = hitMarterial;
         Debug.Log("Hc");
         canHurt = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
+        renderer.material = normalMarterial;
         Debug.Log("Hd");
         canHurt = true;
         

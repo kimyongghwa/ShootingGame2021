@@ -12,9 +12,13 @@ public class MobController : MonoBehaviour
     public float bonusTime;
     public bool isShooting;
     public float shotTime;
+    public float addShotAimY;
     public int bulletNum;
     public GameObject bullet;
     public MobMaker parents;
+    public Renderer renderer;
+    public Material normalMarterial;
+    public Material hitMarterial;
     public float angle;
 
     public List<GameObject> unUsedBullets = new List<GameObject>();
@@ -58,6 +62,10 @@ public class MobController : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+    public void BeHurt()
+    {
+        StartCoroutine(HurtCoroutine());
+    }
     IEnumerator ShotCoroutine()
     {
         while (isShooting)
@@ -74,7 +82,8 @@ public class MobController : MonoBehaviour
                         MBulletMove _bullet = Instantiate(bullet, this.gameObject.transform).GetComponent<MBulletMove>();
                         _bullet.gameObject.transform.parent = null;
                         _bullet.gameObject.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-                        _bullet.SetDirection(new Vector3(Mathf.Cos(gak), Mathf.Sin(gak)));
+                        _bullet.transform.position = new Vector3(_bullet.transform.position.x, _bullet.transform.position.y + addShotAimY);
+                    _bullet.SetDirection(new Vector3(Mathf.Cos(gak), Mathf.Sin(gak)));
                         _bullet.controller = gameObject.GetComponent<MobController>();
                     }
                     else
@@ -83,12 +92,20 @@ public class MobController : MonoBehaviour
                         unUsedBullets[0].transform.position = this.transform.position;
                         unUsedBullets[0].SetActive(true);
                         _bullet.gameObject.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-                        unUsedBullets.RemoveAt(0);
+                    _bullet.transform.position = new Vector3(_bullet.transform.position.x, _bullet.transform.position.y + addShotAimY);
+                    unUsedBullets.RemoveAt(0);
                         _bullet.SetDirection(new Vector3(Mathf.Cos(gak), Mathf.Sin(gak)));
                         _bullet.controller = gameObject.GetComponent<MobController>();
                     }
                 }
             }
+    }
+
+    IEnumerator HurtCoroutine()
+    {
+        renderer.material = hitMarterial;
+        yield return new WaitForSeconds(0.08f);
+        renderer.material = normalMarterial;
     }
 }
 

@@ -28,7 +28,8 @@ public class MiddleBoss1Controller : MBossController
                     MBulletMove _bullet = Instantiate(bullet, this.gameObject.transform).GetComponent<MBulletMove>();
                     _bullet.gameObject.transform.parent = null;
                     _bullet.gameObject.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-                    if(rotationShooting)
+                    _bullet.transform.position = new Vector3(_bullet.transform.position.x, _bullet.transform.position.y + addShotAimY);
+                    if (rotationShooting)
                         _bullet.SetDirection(new Vector3(transform.position.x - target.transform.position.x + Random.Range(-randomAngle, randomAngle), transform.position.y - target.transform.position.y + Random.Range(-randomAngle, randomAngle)).normalized);
                     else
                         _bullet.SetDirection(new Vector3(Mathf.Cos(gak), Mathf.Sin(gak)));
@@ -40,6 +41,7 @@ public class MiddleBoss1Controller : MBossController
                     unUsedBullets[0].transform.position = this.transform.position;
                     unUsedBullets[0].SetActive(true);
                     _bullet.gameObject.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                    _bullet.transform.position = new Vector3(_bullet.transform.position.x, _bullet.transform.position.y + addShotAimY);
                     unUsedBullets.RemoveAt(0);
                     if (rotationShooting)
                         _bullet.SetDirection(new Vector3(transform.position.x - target.transform.position.x + Random.Range(-randomAngle, randomAngle), transform.position.y - target.transform.position.y + Random.Range(-randomAngle, randomAngle)).normalized);

@@ -8,6 +8,7 @@ public class UIController : MonoBehaviour
     public PlayerController pc;
     public Image hpBar;
     public Image expBar;
+    public Image gunBar;
     public Text levelText;
     public Text scoreText;
     public string frontScoreText = "000000";
@@ -20,6 +21,7 @@ public class UIController : MonoBehaviour
         {
             hpBar.fillAmount = pc.hp/ (float)pc.maxHp ;
             expBar.fillAmount = pc.exp /(float)pc.needExp[pc.level];
+            gunBar.fillAmount = pc.bulletShot.GetNBullet / (float)pc.bulletShot.maxBullets;
             levelText.text = pc.level + "LV";
             int j = 0;
             for(int i=1; i<=100000; i *= 10)
