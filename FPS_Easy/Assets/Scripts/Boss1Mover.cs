@@ -22,13 +22,6 @@ public class Boss1Mover : MobMover
         {
             Debug.Log("Mover");
             transform.position = Vector3.MoveTowards(transform.position, mokpyo, time * Time.deltaTime);
-            if (transform.position == mokpyo)
-            {
-                if (moverPos[0] == mokpyo)
-                    mokpyo = moverPos[1];
-                else if (moverPos[1] == mokpyo)
-                    mokpyo = moverPos[0];
-            }
         }
         else
         {

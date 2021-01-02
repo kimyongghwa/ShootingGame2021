@@ -109,7 +109,7 @@
     <None Include="Assets\3DVoxel_Free\FantasyPack\readme_jp.txt" />
     <None Include="Assets\Shaders\FireShader.shader" />
     <None Include="Assets\Shaders\VCMask.shader" />
-    <None Include="Assets\Scenes\Assets\Water Shader\Water_Shader.shader" />
+    <None Include="Assets\Prefabs\Scenes\Assets\Water Shader\Water_Shader.shader" />
     <None Include="Assets\SimplePixelUI\fonts\Font1\readme.txt" />
     <None Include="Assets\SimplePixelUI\fonts\Font2\readme.txt" />
     <None Include="Assets\Shaders\Blinn-phong.shader" />

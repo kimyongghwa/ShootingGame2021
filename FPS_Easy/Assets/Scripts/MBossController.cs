@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MBossController :  MobController  
 {
+    public Material movingMaterial;
+
     void Update()
     {
         if (hp <= 0)

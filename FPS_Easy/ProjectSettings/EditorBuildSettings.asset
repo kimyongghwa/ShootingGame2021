@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
+    path: Assets/Prefabs/Scenes/MainScene.unity
     guid: 003c5a75f5a38c74fb3d35fa1d60b1e3
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Prefabs/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/RankingInput.unity
+    path: Assets/Prefabs/Scenes/RankingInput.unity
     guid: b571225435e8c6447bbc3c7553718863
   - enabled: 1
-    path: Assets/Scenes/RankingScene.unity
+    path: Assets/Prefabs/Scenes/RankingScene.unity
     guid: 8dc4b9beec15c8f4a9fb7129fe9af0f3
   m_configObjects: {}
