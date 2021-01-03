@@ -38,6 +38,7 @@ public class MiddleBoss2Controller : MBossController
                     MBulletMove _bullet = Instantiate(bullet, this.gameObject.transform).GetComponent<MBulletMove>();
                     _bullet.gameObject.transform.parent = null;
                     _bullet.gameObject.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                    _bullet.transform.position = new Vector3(_bullet.transform.position.x, _bullet.transform.position.y + addShotAimY);
                     _bullet.SetDirection(new Vector3(Mathf.Cos(gak), Mathf.Sin(gak)));
                     _bullet.controller = gameObject.GetComponent<MobController>();
                 }
@@ -47,6 +48,7 @@ public class MiddleBoss2Controller : MBossController
                     unUsedBullets[0].transform.position = this.transform.position;
                     unUsedBullets[0].SetActive(true);
                     _bullet.gameObject.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                    _bullet.transform.position = new Vector3(_bullet.transform.position.x, _bullet.transform.position.y + addShotAimY);
                     unUsedBullets.RemoveAt(0);
                     _bullet.SetDirection(new Vector3(Mathf.Cos(gak), Mathf.Sin(gak)));
                     _bullet.controller = gameObject.GetComponent<MobController>();

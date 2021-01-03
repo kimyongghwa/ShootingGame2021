@@ -20,7 +20,6 @@ public class Boss1Mover : MobMover
     {
         if (moverOn)
         {
-            Debug.Log("Mover");
             transform.position = Vector3.MoveTowards(transform.position, mokpyo, time * Time.deltaTime);
         }
         else

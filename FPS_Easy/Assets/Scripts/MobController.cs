@@ -28,6 +28,7 @@ public class MobController : MonoBehaviour
     {
         StartCoroutine(ShotCoroutine());
         hp = maxHp;
+        renderer.material = normalMarterial;
     }
 
     // Update is called once per frame
@@ -57,13 +58,15 @@ public class MobController : MonoBehaviour
     {
         if (other.gameObject.tag == "Boom")
         {
-            hp -= 30;
+            hp -= 80;
+            BeHurt();
             CameraShake.instance.Shake(0.4f, 0.1f);
             Destroy(other.gameObject);
         }
     }
-    public void BeHurt()
+    public virtual void BeHurt()
     {
+        Debug.Log("Cov");
         StartCoroutine(HurtCoroutine());
     }
     IEnumerator ShotCoroutine()
@@ -101,7 +104,7 @@ public class MobController : MonoBehaviour
             }
     }
 
-    IEnumerator HurtCoroutine()
+    public virtual IEnumerator HurtCoroutine()
     {
         renderer.material = hitMarterial;
         yield return new WaitForSeconds(0.08f);
